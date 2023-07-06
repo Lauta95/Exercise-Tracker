@@ -10,6 +10,7 @@ const tracker = db.collection('tracker')
 
 const port = process.env.PORT || 3030;
 
+
 app.use(cors())
 app.use(express.static('public'))
 app.use(express.json())
