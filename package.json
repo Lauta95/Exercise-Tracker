@@ -1,0 +1,25 @@
+{
+	"name": "exercise-tracker",
+	"version": "0.1.0",
+	"description": "REST API para trackear ejercicios delegados",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"dependencies": {
+		"body-parser": "^1.20.2",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.16.4",
+		"mongodb": "^5.7.0",
+		"mongoose": "^7.3.2"
+	},
+	"repository": {
+		"url": "https://github.com/Lauta95/Exercise-Tracker.git"
+	},
+	"license": "MIT",
+	"keywords": [
+		"node",
+		"express"
+	]
+}
