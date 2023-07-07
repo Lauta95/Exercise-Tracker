@@ -32,6 +32,15 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
+app.get('/api/users', async (req, res) => {
+  const users = await User.find({}).select("_id username")
+  if (!users) {
+    res.send('no users');
+  } else {
+    res.json(users);
+  }
+})
+
 // aca se usa un request body
 app.post('/api/users', async (req, res) => {
   console.log(req.body);
@@ -51,11 +60,11 @@ app.post('/api/users', async (req, res) => {
 app.post('/api/users/:_id/exercises', async (req, res) => {
   const id = req.params._id;
   const { description, duration, date } = req.body
-  try{
+  try {
     const user = await User.findById(id)
-    if(!user){
+    if (!user) {
       res.send('no user')
-    }else{
+    } else {
       const exerciseObj = new Exercise({
         user_id: user._id,
         description,
@@ -71,9 +80,24 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
         date: new Date(exercise.date).toDateString()
       })
     }
-  }catch(err){
+  } catch (err) {
     console.log(err);
     res.send("hay un error al intentar guardar")
+  }
+})
+
+app.get("/api/users/:_id/logs", async (req, res) => {
+  // desestructuración ecmascript6 para hacer un req.query triple en una línea:
+  const { from, to, limit } = req.query;
+  const id = req.params._id;
+  const user = await User.findById(id);
+  if(!user){
+    res.send('no se pudo encontrar el usuario');
+    return;
+  }
+  let dateObj = {}
+  if (from) {
+    
   }
 })
 
