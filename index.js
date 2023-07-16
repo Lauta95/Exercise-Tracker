@@ -57,7 +57,7 @@ app.post('/api/users', async (req, res) => {
 })
 
 // aca se usa un request params
-app.post('/api/users/:_id/exercises', async (req, res) => {
+app.get('/api/users/:_id/exercises', async (req, res) => {
   const id = req.params._id;
   const { description, duration, date } = req.body
   try {
