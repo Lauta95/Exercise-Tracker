@@ -56,22 +56,6 @@ app.post('/api/users', async (req, res) => {
   }
 })
 
-// buscar con un id:
-app.get('/api/users/:_id/exercises', async (req, res) => {
-  const id = req.params._id;
-  try {
-    const user = await User.findById(id);
-    if (!user) {
-      res.send('No se encontró ningún usuario con esa ID');
-    } else {
-      res.json(user);
-    }
-  } catch (err) {
-    console.log(err);
-    res.send('Ocurrió un error al intentar buscar el usuario');
-  }
-});
-
 // aca se usa un request params
 app.post('/api/users/:_id/exercises', async (req, res) => {
   const id = req.params._id;
@@ -91,10 +75,10 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
       res.json({
         _id: user._id,
         username: user.username,
-        description: user.description,
+        description: exercise.description,
         duration: exercise.duration,
         date: new Date(exercise.date).toDateString()
-      })
+      });
     }
   } catch (err) {
     console.log(err);
@@ -113,10 +97,10 @@ app.get("/api/users/:_id/logs", async (req, res) => {
   }
   let dateObj = {}
   if (from) {
-    dateObj["$mayorIgualA"] = new Date(from)
+    dateObj["$gte"] = new Date(from)
   }
   if (to) {
-    dateObj["$menorIgualA"] = new Date(to)
+    dateObj["$lte"] = new Date(to)
   }
   let filter = {
     user_id: id
