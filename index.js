@@ -100,7 +100,7 @@ app.get("/api/users/:_id/logs", async (req, res) => {
     dateObj["$mayorIgualA"] = new Date(from)
   }
   if (to) {
-    dateObj("$menorIgualA") = new Date(to)
+    dateObj["$menorIgualA"] = new Date(to)
   }
   let filter = {
     user_id: id
