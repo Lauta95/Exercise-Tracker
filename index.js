@@ -56,8 +56,24 @@ app.post('/api/users', async (req, res) => {
   }
 })
 
-// aca se usa un request params
+// buscar con un id:
 app.get('/api/users/:_id/exercises', async (req, res) => {
+  const id = req.params._id;
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      res.send('No se encontró ningún usuario con esa ID');
+    } else {
+      res.json(user);
+    }
+  } catch (err) {
+    console.log(err);
+    res.send('Ocurrió un error al intentar buscar el usuario');
+  }
+});
+
+// aca se usa un request params
+app.post('/api/users/:_id/exercises', async (req, res) => {
   const id = req.params._id;
   const { description, duration, date } = req.body
   try {
